@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "configured": false,
+  "strategy_version": "unconfigured-example-v1",
+  "currency": "CNY",
+  "investment_horizon_years_min": null,
+  "target_annual_net_return": null,
+  "target_is_guarantee": false,
+  "risk_budget_drawdown_fraction": null,
+  "risk_budget_is_loss_guarantee": false,
+  "allowed_fund_codes": [],
+  "new_fund_codes_allowed": true,
+  "execution_mode": "analysis_and_user_executed_trades",
+  "allocation_targets": {
+    "cash": 1, "pure_bond": 0, "defensive_mixed": 0, "china_broad": 0,
+    "us_broad": 0, "nasdaq": 0, "theme": 0, "gold": 0
+  },
+  "limits": {
+    "pure_bond_fund": 0.2, "theme_direction": 0.02, "weekly_one_way": 0.05,
+    "drift": 0.03, "gold_drift": 0.01, "cooldown_trading_days": 5,
+    "max_routine_redemption_fee_pct": 0.5, "minimum_trade_cny": 100
+  },
+  "drawdown_thresholds": {"warning": null, "freeze_risk_buys": null, "breach": null},
+  "recurring_investment_status": "unknown",
+  "return_scenarios": {
+    "conservative": {"cash": 0, "pure_bond": 0, "defensive_mixed": 0, "china_broad": 0, "us_broad": 0, "nasdaq": 0, "theme": 0, "gold": 0},
+    "central": {"cash": 0, "pure_bond": 0, "defensive_mixed": 0, "china_broad": 0, "us_broad": 0, "nasdaq": 0, "theme": 0, "gold": 0},
+    "optimistic": {"cash": 0, "pure_bond": 0, "defensive_mixed": 0, "china_broad": 0, "us_broad": 0, "nasdaq": 0, "theme": 0, "gold": 0}
+  },
+  "stress_scenarios": {
+    "risk_off": {"cash": 0, "pure_bond": 0, "defensive_mixed": 0, "china_broad": 0, "us_broad": 0, "nasdaq": 0, "theme": 0, "gold": 0},
+    "severe": {"cash": 0, "pure_bond": 0, "defensive_mixed": 0, "china_broad": 0, "us_broad": 0, "nasdaq": 0, "theme": 0, "gold": 0}
+  },
+  "scenario_note": "Unconfigured placeholders, not a recommended allocation or forecast. Set objectives, allocations, limits, drawdown thresholds and scenario assumptions before setting configured=true."
+}

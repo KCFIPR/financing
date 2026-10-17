@@ -1,0 +1,76 @@
+{
+  "series": [
+    {
+      "id": "DGS10",
+      "name": "美国10年期国债名义收益率",
+      "source_id": "fred",
+      "original_provider": "Board of Governors of the Federal Reserve System (US)",
+      "unit": "percent_per_annum",
+      "frequency": "daily",
+      "seasonal_adjustment": "not_seasonally_adjusted",
+      "reference_url": "https://fred.stlouisfed.org/series/DGS10",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",
+      "freshness_calendar_days": 7
+    },
+    {
+      "id": "DFII10",
+      "name": "美国10年期通胀保值国债实际收益率",
+      "source_id": "fred",
+      "original_provider": "Board of Governors of the Federal Reserve System (US)",
+      "unit": "percent_per_annum",
+      "frequency": "daily",
+      "seasonal_adjustment": "not_seasonally_adjusted",
+      "reference_url": "https://fred.stlouisfed.org/series/DFII10",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFII10",
+      "freshness_calendar_days": 7
+    },
+    {
+      "id": "DEXCHUS",
+      "name": "人民币兑美元纽约午间参考汇率",
+      "source_id": "fred",
+      "original_provider": "Board of Governors of the Federal Reserve System (US)",
+      "unit": "CNY_per_USD",
+      "frequency": "daily_observations_weekly_release",
+      "seasonal_adjustment": "not_seasonally_adjusted",
+      "reference_url": "https://fred.stlouisfed.org/series/DEXCHUS",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXCHUS",
+      "freshness_calendar_days": 14
+    },
+    {
+      "id": "SP500",
+      "name": "标普500价格指数",
+      "source_id": "fred",
+      "original_provider": "S&P Dow Jones Indices",
+      "unit": "index_points",
+      "series_kind": "price_index",
+      "frequency": "daily",
+      "reference_url": "https://fred.stlouisfed.org/series/SP500",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500",
+      "freshness_calendar_days": 7
+    },
+    {
+      "id": "NASDAQ100",
+      "name": "纳斯达克100价格指数",
+      "source_id": "fred",
+      "original_provider": "Nasdaq",
+      "unit": "index_points",
+      "series_kind": "price_index",
+      "frequency": "daily",
+      "reference_url": "https://fred.stlouisfed.org/series/NASDAQ100",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQ100",
+      "freshness_calendar_days": 7
+    },
+    {
+      "id": "VIXCLS",
+      "name": "标普500隐含波动率VIX",
+      "source_id": "fred",
+      "original_provider": "CBOE",
+      "unit": "percent",
+      "series_kind": "price_index",
+      "frequency": "daily",
+      "reference_url": "https://fred.stlouisfed.org/series/VIXCLS",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS",
+      "freshness_calendar_days": 7
+    }
+  ]
+}

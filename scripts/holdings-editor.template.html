@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的持仓 · 填写与保存</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,"Microsoft YaHei",sans-serif;color:#203c3a;background:#f3f6f3}*{box-sizing:border-box}body{margin:0}main{max-width:1080px;margin:auto;padding:32px 20px 100px}h1{font-size:30px;margin:8px 0}h2{font-size:18px;margin:0}p{line-height:1.7;color:#52635e}.eyebrow{font-size:12px;letter-spacing:2px;color:#417e69}.card{background:white;border:1px solid #dce5df;border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 4px 16px #1f4c3610}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}label{display:block;font-size:13px;color:#425b53}input,textarea,select{display:block;width:100%;padding:11px 12px;margin-top:7px;border:1px solid #cbd8d0;border-radius:8px;background:#fff;font:inherit;color:#203c3a}input:focus,textarea:focus{outline:2px solid #2b8068;outline-offset:1px}input[type=checkbox]{display:inline;width:auto;margin:0 8px 0 0}input:disabled{background:#eef2ef;color:#647a70}button,.file{border:1px solid #cbd8d0;background:white;color:#203c3a;padding:10px 14px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px}button:hover,.file:hover{background:#eaf2ed}.primary{background:#205f4f;color:white;border-color:#205f4f}.primary:hover{background:#184b3e}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.muted{color:#6b7d74;font-size:12px}.pill{background:#eaf3ed;color:#30694f;padding:5px 9px;border-radius:20px;font-size:12px}.fundhead{display:flex;justify-content:space-between;gap:12px;align-items:center}.batches{margin-top:18px;overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:490px}th{text-align:left;color:#536b60;font-weight:500;font-size:12px}td,th{padding:6px}td:first-child{width:40px}td:last-child{width:65px}td input{min-width:100px}.hint{background:#eef5ee;border-radius:10px;padding:12px 16px;font-size:13px;color:#446352}.footer{position:fixed;bottom:0;left:0;right:0;border-top:1px solid #dce5df;background:#fffffff5;padding:12px 20px;backdrop-filter:blur(10px)}.footer>div{max-width:1040px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}details{margin-top:16px}summary{font-size:13px;cursor:pointer;color:#4b7160}.search{margin:22px 0 10px}#message{white-space:pre-line;line-height:1.5;color:#205f4f;font-size:13px}#message.error{color:#a13226}.empty{color:#6b7d74;padding:20px}.wide{grid-column:1/-1}@media(max-width:650px){main{padding:20px 12px 145px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:16px}.fundhead{align-items:flex-start}h1{font-size:25px}.footer{padding:10px 12px}.footer button{padding:9px}.toolbar{gap:6px}}
+</style>
+<style>
+td button{white-space:nowrap}
+.excluded{background:#f8faf8;border-style:dashed}.excluded .pill{background:#edf0ed;color:#68766e}.danger{color:#a13226}dialog{width:min(580px,calc(100% - 24px));border:1px solid #cbd8d0;border-radius:16px;padding:24px;color:#203c3a}dialog::backdrop{background:#203c3a55}dialog .grid{grid-template-columns:1fr 1fr}.scope-line{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:16px 0}.scope-line select{width:auto;margin:0}.scope-line label{display:flex;align-items:center;gap:8px}
+@media(max-width:650px){.batches{overflow:visible}table,tbody{display:block;min-width:0}thead{display:none}tbody{display:grid;gap:12px}tr{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#f6f8f5;border-radius:10px;padding:10px}td,td:first-child,td:last-child{width:auto;padding:0}td:first-child{grid-column:1/-1;font-size:12px;color:#536b60}td:first-child:before{content:'批次 '}td:nth-child(2){grid-column:1/-1}td:nth-child(2):before{content:'持有份额（份）'}td:nth-child(3):before{content:'最少持有天数（含）'}td:nth-child(4):before{content:'最多持有天数（含）'}td:nth-child(5){grid-column:1/-1}td:nth-child(5):before{content:'当前赎回费率（%）'}td:before{font-size:12px;color:#536b60}td input{min-width:0}td:last-child{grid-column:1/-1;justify-self:end}}
+</style>
+<main>
+<div class="eyebrow">PORTFOLIO / DAILY SNAPSHOT</div>
+<h1>把持仓记清楚</h1>
+<p>每次填写查看日期、可用现金和各基金金额。批次按「份额 · 持有天数 · 当前赎回费率」记录，支持多次买入。</p>
+<div class="hint">金额与份额请核对平台后填写。持有天数分为<strong>最少／最多</strong>，两端都包含：7至59天填 <strong>7／59</strong>；至少60天只填最少 <strong>60</strong>，最多留空；不足7天只填最多 <strong>6</strong>。确切天数两框填相同值，未知两框留空。费率填百分数：<strong>0.5 表示 0.5%</strong>，免赎回费填 0。单位净值仅填正式净值，并填写它实际所属的日期。</div>
+<section class="card"><h2>本次记录</h2><div class="grid">
+<label>查看日期 *<input id="date" type="date" required></label>
+<label>策略可用现金（元）*<input id="cash" type="number" min="0" step="any" placeholder="没有可用现金填 0"></label>
+<label>纳入分析的持仓金额<div id="total" style="font-size:23px;margin-top:12px">尚未填写</div></label>
+</div><p class="muted">现金只填写已经到账、可用于本策略的余额。纳入分析的投资金额必填；暂不分析的投资可以保留记录，金额选填。</p>
+<details><summary>现金备注与待确认款（可选）</summary><div class="grid"><label>现金待确认申购（元）<input data-cash="pending_buy_cny" type="number" min="0" step="any"></label><label>现金待到账赎回（元）<input data-cash="pending_redemption_receivable_cny" type="number" min="0" step="any"></label><label>现金备注<input data-cash="notes"></label></div></details>
+</section>
+<div class="toolbar"><button id="save" disabled>保存草稿到 JSON</button><button id="reload" disabled>重新读取 JSON</button><label class="file">载入 JSON 文件<input id="load" type="file" accept=".json,application/json" hidden style="display:none" disabled></label><span id="draftStatus" class="muted">正在读取每日持仓.json…</span></div>
+<label class="search">查找基金<input id="search" type="search" placeholder="输入名称、代码、平台或持仓编号"></label>
+<div class="scope-line"><button id="addInvestment" class="primary" disabled>＋ 添加投资</button><label>显示<select id="scopeFilter"><option value="all">全部记录</option><option value="included">纳入分析</option><option value="excluded">暂不分析</option></select></label><span id="scopeStatus" class="muted"></span></div>
+<p class="muted">暂不需要分析的基金可取消“纳入分析”，之后随时恢复。删除投资会从当前记录中移除，保存前可重新读取撤销，保存后仍保留历史版本。</p>
+<div id="funds"></div><p class="muted">所有份额默认可赎回；有锁定或冻结份额时取消勾选，填写实际可赎回份额。持有天数以本次查看日期为准，更新日期后请核对天数和当前费率。当前费率不会自动用于未来日期。</p>
+</main>
+<dialog id="newInvestment"><form id="newInvestmentForm"><h2>添加投资</h2><div class="grid"><label>基金代码 *<input id="newCode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="输入六位代码自动查询名称" required></label><label>基金名称（含 A/C 类）*<input id="newName" placeholder="自动查询，也可手动填写" required></label><div class="wide toolbar"><span id="fundLookupStatus" class="muted" role="status" aria-live="polite">输入完整六位代码后自动查询名称</span><button id="retryFundLookup" type="button">重新查询</button></div><label>持仓平台 *<input id="newPlatform" list="platforms" required></label><label>投资类型<select id="newCategory"><option value="other">其他／待确认</option><option value="bond">债券</option><option value="equity">股票型／指数基金</option><option value="gold">黄金</option><option value="money_market">货币</option><option value="mixed">混合</option></select></label><label class="wide"><input id="newAnalysis" type="checkbox" checked>纳入分析</label></div><p class="muted">当前仅支持公募基金净值分析，不支持个股或场内ETF成交价分析。股票代码可能与基金代码重复，请勿混填。同一基金在不同平台或账户可以分别添加。添加后填写金额和买入批次。</p><div class="toolbar"><button type="button" id="cancelInvestment">取消</button><button type="submit" class="primary">添加</button></div></form></dialog><datalist id="platforms"><option value="支付宝"><option value="天天基金"><option value="招商银行"><option value="工商银行"><option value="微众银行"></datalist>
+<div class="footer"><div><div id="message" role="status" aria-live="polite">读取 JSON 后即可填写，保存直接写回项目文件。</div><div class="toolbar"><button id="json" disabled>下载 JSON 备份</button><button id="commit" class="primary" disabled>保存并校验</button></div></div></div>
+<script>
+'use strict';
+/* CORE */
+let doc = null, revision = null, registered = [], allowedCodes = [], lastValidatedDate = null, dirty = false, saving = false;
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const message = (s, error = false) => { $('message').textContent = s; $('message').className = error ? 'error' : ''; };
+function field(h, prop, label, type = 'number', extra = '') {
+  const signed = ['holding_pnl_cny','holding_return_pct'].includes(prop);
+  return `<label>${label}<input data-field="${prop}" type="${type}" value="${esc(h[prop])}" ${type === 'number' ? `${signed ? '' : 'min="0" '}step="any"` : ''} ${extra}></label>`;
+}
+function batchInputs(h,b,i) {
+  const columns = [['units','份额','未知留空'],['holding_days_min','最少持有天数（含）','无下限留空'],['holding_days_max','最多持有天数（含）','无上限留空'],['redemption_fee_pct','费率','免赎回费填 0']];
+  return columns.map(([prop,label,placeholder]) => `<td><input aria-label="${esc(h.name)}批次${i+1}${label}" data-prop="${prop}" type="number" min="0" step="${prop.startsWith('holding_days_')?'1':'any'}" ${prop==='redemption_fee_pct'?'max="100"':''} value="${esc(b[prop])}" placeholder="${placeholder}"></td>`).join('');
+}
+function estimatedReturnField(h) {
+  let pct=null;
+  try { pct=estimateHoldingReturnPct(h.amount_cny,h.holding_pnl_cny); } catch {}
+  return `<label>持有收益率（%，自动估算）<input data-estimated-return type="text" readonly value="${pct===null?'':pct.toFixed(2)+'%'}" placeholder="填写金额和持有收益后自动计算"></label>`;
+}
+function render() {
+  $('date').value = doc.snapshot_date ?? ''; $('cash').value = doc.cash.amount_cny ?? '';
+  document.querySelectorAll('[data-cash]').forEach(el => el.value = doc.cash[el.dataset.cash] ?? '');
+  $('funds').innerHTML = doc.holdings.map(h => `<section class="card fund ${h.analysis_enabled === false?'excluded':''}" data-id="${esc(h.id)}">
+    <div class="fundhead"><div><h2>${esc(h.name)}</h2><p class="muted identity" style="margin:5px 0">${esc(h.code)} · ${esc(h.platform)} · ${esc(h.id)}</p></div><div class="toolbar"><span class="pill">${h.analysis_enabled===false?'暂不分析':h.batches.length+' 个批次'}</span><button data-delete-investment class="danger">删除投资</button></div></div>
+    <div class="grid"><label style="align-self:center"><input data-analysis type="checkbox" ${h.analysis_enabled===false?'':'checked'}>纳入分析</label>${h.analysis_enabled===false?field(h,'excluded_reason','暂不分析原因（可选）','text'):''}</div>
+    <details><summary>编辑投资名称、代码、平台与类型</summary><div class="grid">${field(h,'code','基金代码（六位）','text','maxlength="6" inputmode="numeric"')}${field(h,'name','基金名称（含 A/C 类）','text')}${field(h,'platform','持仓平台','text','list="platforms"')}<label>投资类型<select data-field="category">${[['other','其他／待确认'],['bond','债券'],['equity','股票型／指数基金'],['gold','黄金'],['money_market','货币'],['mixed','混合']].map(([value,label])=>`<option value="${value}" ${h.category===value?'selected':''}>${label}</option>`).join('')}</select></label></div></details>
+    <div class="grid">${field(h,'amount_cny',h.analysis_enabled===false?'当前持有金额（元，选填）':'当前持有金额（元）*','number',`placeholder="填写当前持有金额"`)}${field(h,'unit_nav','正式单位净值（元，可选）')}${field(h,'nav_date','净值所属日期（可选）','date')}</div>
+    <div class="grid">${field(h,'holding_pnl_cny','持有收益（元，选填）','number','placeholder="亏损填负数，如 -123.45"')}${estimatedReturnField(h)}</div>
+    <p class="muted">收益率自动按“持有收益 ÷（当前持有金额 − 持有收益）× 100%”估算；缺少金额、收益或推算成本不为正时留空。分红、费用等可能使估算值与平台口径不同。持有收益不额外加到资产合计。</p>
+    <details><summary>平台持有收益率（可选，用于核对）</summary><div class="grid">${field(h,'holding_return_pct','平台持有收益率（%，可选）','number','placeholder="直接抄平台数字，无需自行计算"')}</div><p class="muted">如平台有显示，可直接填写；之前填写的收益率在这里保留，自动估算不会覆盖它。</p></details>
+    <div class="batches"><table><thead><tr><th>批次</th><th>持有份额（份）</th><th>最少天数（含）</th><th>最多天数（含）</th><th>当前赎回费率（%）</th><th></th></tr></thead><tbody>${h.batches.map((b,i) => `<tr data-batch="${i}"><td>${i+1}</td>${batchInputs(h,b,i)}<td><button data-remove="${i}" aria-label="删除${esc(h.name)}批次${i+1}">删除</button></td></tr>`).join('')}</tbody></table></div>
+    <div class="toolbar" style="margin-top:12px"><button data-add>＋ 增加批次</button><span class="muted batch-total"></span></div>
+    <div class="grid"><label style="align-self:center"><input data-all type="checkbox" ${h.all_redeemable ? 'checked' : ''}>全部已填份额均可赎回</label>${field(h,'redeemable_units','实际可赎回份额（份）','number',h.all_redeemable ? 'disabled' : '')}</div>
+    <details><summary>备注与待确认款（可选）</summary><div class="grid">${field(h,'pending_buy_cny','待确认申购（元）')}${field(h,'pending_redemption_receivable_cny','待到账赎回（元）')}${field(h,'notes','备注','text')}</div><p class="muted">没有待确认款填 0；不确定留空。款项不会自动加到资产合计，同一笔款项不要在现金和基金中重复填写。</p></details>
+  </section>`).join('');
+  totals(); filter();
+}
+function totals() {
+  const included = doc.holdings.filter(h=>h.analysis_enabled!==false);
+  const filled = included.filter(h => h.amount_cny !== '' && h.amount_cny != null);
+  $('total').textContent = filled.length || !included.length ? `${filled.reduce((s,h) => s + Number(h.amount_cny),0).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2})} 元` : '尚未填写';
+  $('total').title = `纳入分析的金额已填写 ${filled.length}/${included.length} 笔，不含现金及暂不分析项`;
+  $('scopeStatus').textContent=`共 ${doc.holdings.length} 笔 · 纳入分析 ${included.length} 笔 · 暂不分析 ${doc.holdings.length-included.length} 笔`;
+  document.querySelectorAll('.fund').forEach(el => {
+    const h = doc.holdings.find(h => h.id === el.dataset.id);
+    const units = h.batches.reduce((s,b) => s + Number(b.units || 0),0);
+    let pct=null;
+    try { pct=estimateHoldingReturnPct(h.amount_cny,h.holding_pnl_cny); } catch {}
+    h.estimated_holding_return_pct=pct;
+    el.querySelector('[data-estimated-return]').value=pct===null?'':pct.toFixed(2)+'%';
+    el.querySelector('.batch-total').textContent = `已填份额合计 ${Number(units.toFixed(8))} 份`;
+  });
+}
+function filter() {
+  const query = $('search').value.trim().toLowerCase();
+  const scope=$('scopeFilter').value;
+  document.querySelectorAll('.fund').forEach(el => { const h = doc.holdings.find(h => h.id === el.dataset.id); el.hidden = ![h.id,h.code,h.name,h.platform].join(' ').toLowerCase().includes(query) || scope==='included'&&h.analysis_enabled===false || scope==='excluded'&&h.analysis_enabled!==false; });
+}
+function changed() { dirty = true; $('draftStatus').textContent = '有未保存修改 · 数据文件：每日持仓.json'; }
+function controls(enabled) { document.querySelectorAll('input,button,select').forEach(el => { el.disabled = !enabled; }); if (enabled) document.querySelectorAll('.fund').forEach(card => {const h=doc.holdings.find(h=>h.id===card.dataset.id);card.querySelector('[data-field="redeemable_units"]').disabled=h.all_redeemable;}); }
+async function request(method,body) {
+  const response = await fetch('/api/holdings',{method,cache:'no-store',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify({...body,api_version:editorApiVersion()}):undefined});
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.error || '读写失败');
+  if (result.api_version !== editorApiVersion()) throw new Error('持仓服务仍是旧版本，请先关闭原服务并重新启动。当前页面的未保存内容已保留，请勿关闭或刷新。');
+  return result;
+}
+async function readDocument() {
+  if (saving) return;
+  if (dirty && !confirm('重新读取将放弃页面中未保存的修改。继续？')) return;
+  controls(false);
+  try {
+    const result=await request('GET');
+    doc=result.document;revision=result.revision;registered=result.registered;allowedCodes=result.allowed_codes;lastValidatedDate=result.last_validated_date;dirty=false;
+    render();controls(true);
+    $('draftStatus').textContent=`已读取每日持仓.json · ${doc.status==='validated'?'已校验记录':'草稿'}${lastValidatedDate?' · 最近正式日期 '+lastValidatedDate:''}`;
+    message('已从 JSON 读取，修改后点“保存草稿”或“保存并校验”。');
+  } catch(e) { message('无法读取 JSON：'+e.message,true); $('draftStatus').textContent='读取失败，请检查本地服务和JSON文件'; $('reload').disabled=false; }
+}
+async function save(mode) {
+  if (!doc || saving) return;
+  try {
+    validateEditorDocument(doc,registered,allowedCodes,{draft:mode==='draft',earliestDate:mode==='commit'?lastValidatedDate:null});
+    saving=true;controls(false);
+    // An old process can serve a new HTML file while retaining old validation in memory.
+    // Check before PUT so it cannot silently discard newly added fields.
+    const active=await request('GET');
+    if(active.revision!==revision)throw new Error('JSON已被其他窗口或编辑器修改，请先下载备份，再重新读取后保存');
+    const result=await request('PUT',{document:doc,revision,mode});
+    doc=result.document;revision=result.revision;lastValidatedDate=result.last_validated_date;dirty=false;render();
+    $('draftStatus').textContent=`已保存到每日持仓.json · ${mode==='commit'?'已校验':'草稿'} · ${new Date().toLocaleTimeString('zh-CN')}`;
+    message(mode==='commit'?`保存并校验成功，正式分析快照已更新。${result.missing_execution_fields.length?'还有 '+result.missing_execution_fields.length+' 笔持仓缺少批次或费用信息，可后续补齐。':''}`:'草稿已写入每日持仓.json，可关闭页面，下次继续填写。');
+  } catch(e) { message(e.message,true); }
+  finally {saving=false;if(doc)controls(true);}
+}
+function loadDoc(next) {
+  doc = validateEditorDocument(next,registered,allowedCodes,{draft:true});render();changed();
+}
+function download(name, content, type) {
+  const url = URL.createObjectURL(new Blob([content],{type})); const a = document.createElement('a'); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url),2000);
+}
+function exportFile() {
+  try {
+    const backup=validateEditorDocument(doc,registered,allowedCodes,{draft:true});
+    download(`持仓-${doc.snapshot_date || '草稿'}.json`,JSON.stringify(backup,null,2)+'\n','application/json;charset=utf-8');
+    message('JSON 备份已下载；写回项目文件请点“保存草稿”或“保存并校验”。');
+  } catch(e) { message(e.message,true); }
+}
+$('date').addEventListener('input', e => { doc.snapshot_date = e.target.value; changed(); message('查看日期已更新，请核对各批次持有天数和当前费率。'); });
+$('cash').addEventListener('input', e => { doc.cash.amount_cny = e.target.value; changed(); });
+document.querySelectorAll('[data-cash]').forEach(el => el.addEventListener('input', () => { doc.cash[el.dataset.cash] = el.value; changed(); }));
+$('funds').addEventListener('input', e => {
+  const card = e.target.closest('.fund'); if (!card) return;
+  const h = doc.holdings.find(h => h.id === card.dataset.id);
+  if (e.target.dataset.field) h[e.target.dataset.field] = e.target.value;
+  if (e.target.dataset.prop) h.batches[Number(e.target.closest('[data-batch]').dataset.batch)][e.target.dataset.prop] = e.target.value;
+  if (e.target.hasAttribute('data-all')) { h.all_redeemable = e.target.checked; card.querySelector('[data-field="redeemable_units"]').disabled = h.all_redeemable; }
+  if (e.target.hasAttribute('data-analysis')) {h.analysis_enabled=e.target.checked;render();message(h.analysis_enabled?'已重新纳入分析，保存并校验后生效。':'已设为暂不分析；金额不计入策略合计，保存并校验后生效。');}
+  if (['name','code','platform'].includes(e.target.dataset.field)) {card.querySelector('h2').textContent=h.name;card.querySelector('.identity').textContent=`${h.code} · ${h.platform} · ${h.id}`;}
+  totals(); changed();
+});
+$('funds').addEventListener('click', e => {
+  const button = e.target.closest('button'); if (!button) return;
+  const h = doc.holdings.find(h => h.id === button.closest('.fund').dataset.id);
+  if (button.hasAttribute('data-delete-investment')) {if(!confirm(`删除“${h.name}”的投资记录？保存后生效，旧版本会保留。`))return;doc.holdings=doc.holdings.filter(item=>item.id!==h.id);message('投资已从页面移除，保存后写回 JSON。');}
+  else if (button.hasAttribute('data-add')) h.batches.push({units:'',holding_days_min:'',holding_days_max:'',redemption_fee_pct:''});
+  else if (button.hasAttribute('data-remove')) { const index = Number(button.dataset.remove); if (Object.values(h.batches[index]).some(v => v !== '' && v != null) && !confirm('删除这个已填写的批次？')) return; h.batches.splice(index,1); }
+  else return;
+  render(); changed();
+});
+$('load').addEventListener('change', async e => {
+  try { const file = e.target.files[0]; if (!file) return; const next = JSON.parse(await file.text()); if (!confirm('载入文件会替换页面内容。继续？')) return; loadDoc(next); message('已载入文件。请核对后保存到项目 JSON。'); }
+  catch(e) { message(e.message,true); } finally { $('load').value = ''; }
+});
+$('save').onclick=()=>save('draft');$('commit').onclick=()=>save('commit');$('reload').onclick=readDocument;$('json').onclick=exportFile;$('search').oninput=()=>{if(doc)filter();};
+$('scopeFilter').onchange=()=>{if(doc)filter();};
+let lookupTimer = null, lookupController = null, lookupVersion = 0;
+function cancelNameLookup() {
+  clearTimeout(lookupTimer);lookupController?.abort();lookupController=null;lookupVersion++;
+}
+function scheduleNameLookup() {
+  cancelNameLookup();
+  const code=$('newCode').value.trim(),version=lookupVersion,nameBefore=$('newName').value;
+  $('fundLookupStatus').textContent=/^\d{6}$/.test(code)?'正在查询基金名称…':'输入完整六位代码后自动查询名称';
+  if (!/^\d{6}$/.test(code)) return;
+  lookupTimer=setTimeout(async()=>{
+    lookupController=new AbortController();
+    try {
+      const response=await fetch('/api/fund?code='+encodeURIComponent(code),{cache:'no-store',signal:lookupController.signal});
+      const result=await response.json();
+      if(version!==lookupVersion||$('newCode').value.trim()!==code)return;
+      if(!response.ok)throw new Error(result.error||'基金名称查询失败');
+      if(result.code!==code||typeof result.name!=='string'||!result.name.trim())throw new Error('基金名称查询结果无效');
+      if($('newName').value===nameBefore) {
+        $('newName').value=result.name;
+        $('fundLookupStatus').textContent='已查询：'+result.name+' · '+result.source+'；名称可手动修改';
+      } else $('fundLookupStatus').textContent='查询结果：'+result.name+'；已保留你手动填写的名称';
+    } catch(error) {
+      if(error.name==='AbortError'||version!==lookupVersion)return;
+      $('fundLookupStatus').textContent=error.message+'。可手动填写名称，或点击重新查询。';
+    }
+  },300);
+}
+$('newCode').addEventListener('input',()=>{
+  // A name for the preceding code must not be submitted for the new code.
+  $('newName').value='';scheduleNameLookup();
+});
+$('retryFundLookup').onclick=scheduleNameLookup;
+$('addInvestment').onclick=()=>{cancelNameLookup();$('newInvestmentForm').reset();$('fundLookupStatus').textContent='输入完整六位代码后自动查询名称';$('newInvestment').showModal();};
+$('newInvestment').addEventListener('close',cancelNameLookup);
+$('cancelInvestment').onclick=()=>{$('newInvestment').close();};
+$('newInvestmentForm').onsubmit=e=>{
+  e.preventDefault();
+  const name=$('newName').value.trim(),code=$('newCode').value.trim(),platform=$('newPlatform').value.trim();
+  if(!name||!platform||!/^\d{6}$/.test(code))return;
+  const h={id:'I_'+crypto.randomUUID().replaceAll('-',''),code,name,platform,category:$('newCategory').value,analysis_enabled:$('newAnalysis').checked,excluded_reason:'',previous_amount_cny:null,amount_cny:null,holding_pnl_cny:null,holding_return_pct:null,estimated_holding_return_pct:null,unit_nav:null,nav_date:null,all_redeemable:true,redeemable_units:null,pending_buy_cny:null,pending_redemption_receivable_cny:null,notes:'',batches:[{units:null,holding_days_min:null,holding_days_max:null,redemption_fee_pct:null}]};
+  doc.holdings.unshift(h);$('newInvestment').close();$('search').value='';$('scopeFilter').value='all';render();changed();document.querySelector('.fund').scrollIntoView({behavior:'smooth',block:'start'});message('已添加投资，请填写金额、持有收益和批次后保存。');
+};
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
+if (location.protocol === 'file:') {controls(false);message('请关闭此页面，双击“启动持仓填写.cmd”，通过本地服务读取和保存 JSON。',true);$('draftStatus').textContent='请使用启动入口打开';}
+else {controls(false);readDocument();}
+</script>
+</html>

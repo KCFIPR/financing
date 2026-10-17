@@ -1,0 +1,23 @@
+{
+  "name": "portfolio-data-workbench",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "holdings": "node scripts/holdings-server.mjs --open",
+    "init": "node scripts/init.mjs && node scripts/build-holdings-editor.mjs",
+    "collect": "node scripts/data.mjs collect",
+    "reports": "node scripts/data.mjs reports",
+    "market": "node scripts/data.mjs market",
+    "verify": "node scripts/data.mjs verify",
+    "status": "node scripts/data.mjs status",
+    "snapshot:check": "node scripts/snapshot.mjs check",
+    "snapshot:import": "node scripts/snapshot.mjs import",
+    "test": "node --test tests/*.test.mjs",
+    "daily": "node scripts/daily.mjs",
+    "preholdings": "node scripts/build-holdings-editor.mjs",
+    "pretest": "node scripts/build-holdings-editor.mjs"
+  }
+}

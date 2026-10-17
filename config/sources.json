@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "sources": [
+    { "id": "account_records", "priority": 1, "status": "awaiting_user_records", "method": "local_import", "purpose": "持仓份额、交易、分红、费用、现金流", "origin": "用户持仓平台", "frequency": "monthly", "limitations": "不通过公开行情反推账户流水；账户文件置于data/private。" },
+    { "id": "fund_disclosures", "priority": 1, "status": "archive_ready", "method": "document_download", "origin": "基金公司及公告原始PDF", "discovery_url": "https://webapi.cninfo.com.cn/", "frequency": "on_publication", "limitations": "登记的既有报告不是最新报告认证；需要另行核查最新披露、日期和完整性。" },
+    { "id": "eastmoney_nav", "priority": 1, "status": "collector_ready", "method": "http", "origin": "东方财富/天天基金", "url_template": "https://fund.eastmoney.com/pingzhongdata/{code}.js", "frequency": "daily", "freshness_calendar_days": 7, "limitations": "非承诺稳定的网页数据接口；单位净值不是复权总收益；原始分红注释仅保留，未标准化。需与官方净值抽样核对。" },
+    { "id": "akshare", "priority": 2, "status": "candidate_not_connected", "method": "python_library", "origin": "依各接口标注的上游", "documentation_url": "https://akshare.akfamily.xyz/data/fund/fund_public.html", "limitations": "可能与eastmoney_nav同源，不视为独立验证；当前没有安装Python环境。" },
+    { "id": "tushare", "priority": 2, "status": "candidate_not_connected", "method": "api", "origin": "Tushare", "documentation_url": "https://tushare.pro/document/2?doc_id=119", "limitations": "接入前核实token、权限、费用、历史覆盖和上游来源。" },
+    { "id": "index_disclosures", "priority": 1, "status": "manual_research_pending", "method": "official_documents", "origin": "中证/国证/Nasdaq/S&P及目标ETF管理人", "urls": ["https://www.csindex.com.cn/", "https://www.cnindex.com.cn/"], "purpose": "指数规则、成分、权重及ETF穿透", "frequency": "monthly_and_on_change", "limitations": "必须记录成分生效日；联接基金需要穿透目标ETF。" },
+    { "id": "chinabond", "priority": 1, "status": "manual_import_pending", "method": "official_download", "origin": "中债", "url": "https://valuation.chinabond.com.cn/cbweb-mn/val/val_query_list?locale=zh_CN", "purpose": "收益率曲线、债券估值、久期和信用利差", "frequency": "weekly", "limitations": "公开页面不等于已获批量API权限；基金完整久期可能不披露。" },
+    { "id": "sge", "priority": 1, "status": "manual_import_pending", "method": "official_download", "origin": "上海黄金交易所", "url": "https://www.sge.com.cn/sjzx/quotation_daily_new", "purpose": "国内黄金行情和上海金基准", "frequency": "daily", "limitations": "按具体合约、基准、单位和币种分别存储。" },
+    { "id": "china_macro", "priority": 2, "status": "manual_import_pending", "method": "official_download", "origin": "国家统计局/中国人民银行", "urls": ["https://data.stats.gov.cn/", "https://www.stats.gov.cn/xxgk/sjfb/fbrcb/", "https://www.pbc.gov.cn/"], "purpose": "通胀、PMI、经济活动、政策利率和汇率", "frequency": "on_publication", "limitations": "记录初值/修订值、统计期间及公开时间。" },
+    { "id": "fred", "priority": 2, "status": "public_download_collector_ready", "method": "official_public_download", "origin": "各序列原始机构，经FRED分发", "documentation_url": "https://fred.stlouisfed.org/docs/api/fred/", "purpose": "美国名义利率、实际利率、人民币兑美元参考汇率", "frequency": "weekly", "limitations": "第一版使用公开序列下载，不是认证API；API/vintage接入另需配置。历史研究考虑数据修订和可知时间。" },
+    { "id": "industry_events", "priority": 2, "status": "manual_research_pending", "method": "official_filings_and_news_discovery", "origin": "公司财报、主管部门、行业协会；新闻辅助", "purpose": "医药、半导体、高端装备的经营及政策变化", "frequency": "weekly_and_on_event", "limitations": "事实与研究观点分开；回溯原文，新闻不直接作为交易触发。" }
+  ]
+}
